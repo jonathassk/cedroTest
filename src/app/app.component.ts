@@ -35,6 +35,16 @@ export class AppComponent implements OnInit {
     })
   }
 
+  deleteClient(client: Client) {
+    this.clientService.deleteClient(client).subscribe(() => {
+      this.getClients();
+    })
+  }
+
+  editClient (client: Client) {
+    this.client = {...client};
+  }
+
   cleanForm(form: NgForm) {
     this.getClients();
     form.resetForm();

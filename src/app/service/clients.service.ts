@@ -31,8 +31,8 @@ export class ClientsService {
     return this.httpClient.put<Client>(`${this.url}/${client.id}`, client, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  deleteClient(id: Number, client: Client): Observable<Client> {
-    return this.httpClient.delete<Client>(`${this.url}/${id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  deleteClient(client: Client): Observable<Client> {
+    return this.httpClient.delete<Client>(`${this.url}/${client.id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {
