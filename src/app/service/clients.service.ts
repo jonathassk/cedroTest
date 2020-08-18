@@ -31,7 +31,6 @@ export class ClientsService {
     data.push(client);
     localStorage.setItem("client", JSON.stringify(data));
     return client;
-    //return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   updateClient(client: Client): Client {
@@ -48,7 +47,6 @@ export class ClientsService {
     let dataFiltered = data.filter(item => item.id !== client.id)
     localStorage.setItem("client", JSON.stringify(dataFiltered));
     return data;
-    //return this.httpClient.delete<Client>(`${this.url}/${client.id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {
