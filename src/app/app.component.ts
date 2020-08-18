@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from './models/Client';
 import { ClientsService } from './service/clients.service';
 import {NgForm, NgModel} from '@angular/forms';
-import {ErrorFormHandlerService} from './service/errorFormHandler.service';
 
 
 @Component({
@@ -16,7 +15,7 @@ export class AppComponent implements OnInit {
   clients: Client[];
   inputEmpty: Client;
 
-  constructor(private clientService: ClientsService, private errorFormHandler: ErrorFormHandlerService) {
+  constructor(private clientService: ClientsService) {
 
   }
 
@@ -25,19 +24,14 @@ export class AppComponent implements OnInit {
   }
 
   async postClient(form: NgForm): Promise<void> {
-    const [inputEmpty, isOk] = this.errorFormHandler.verifyEmptySpace(form.value);
-    if (isOk) {
-      if (this.client.id !== undefined) {
+    if (this.client.id !== undefined) {
         await this.clientService.updateClient(this.client).subscribe(() => {
           this.cleanForm(form);
         });
       } else {
-        await this.clientService.postClient(this.client).subscribe(() => {
-          this.cleanForm(form);
-        });
-      }
-    } else {
-      this.inputEmpty = inputEmpty;
+      await this.clientService.postClient(this.client).subscribe(() => {
+        this.cleanForm(form);
+      });
     }
   }
 
