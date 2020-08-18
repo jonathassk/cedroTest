@@ -17,15 +17,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() { this.getClients(); }
 
-  postClient(form: NgForm) {
+  async postClient(form: NgForm) {
     if(this.client.id !== undefined) {
       this.clientService.updateClient(this.client).subscribe(() => {
         this.cleanForm(form);
       })
     } else {
-      this.clientService.postClient(this.client).subscribe(() => {
-        this.cleanForm(form);
-      })
+      await this.clientService.postClient(this.client);
+      this.getClients();
     }
   }
 

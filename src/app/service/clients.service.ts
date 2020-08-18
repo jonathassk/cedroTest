@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {Client} from '../models/Client';
+import { v4 as uuidv4 } from 'uuid';
 import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -24,15 +25,16 @@ export class ClientsService {
     return this.httpClient.get<Client>(`${this.url}/${id}`).pipe(retry(1), catchError(this.handleError));
   } 
 
-  postClient(client: Client): Observable<Client> {
+  postClient(client: Client): Client {
     let data = JSON.parse(localStorage.getItem("client") || '[]');
+    client.id = uuidv4();
     data.push(client);
     localStorage.setItem("client", JSON.stringify(data));
-    return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return client;
+    //return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   updateClient(client: Client): Observable<Client> {
-    
     return this.httpClient.put<Client>(`${this.url}/${client.id}`, client, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
