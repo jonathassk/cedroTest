@@ -38,8 +38,12 @@ export class ClientsService {
     return this.httpClient.put<Client>(`${this.url}/${client.id}`, client, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  deleteClient(client: Client): Observable<Client> {
-    return this.httpClient.delete<Client>(`${this.url}/${client.id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  deleteClient(client: Client): Client[] {
+    let data = JSON.parse(localStorage.getItem("client") || '[]');
+    let dataFiltered = data.filter(item => item.id !== client.id)
+    localStorage.setItem("client", JSON.stringify(dataFiltered));
+    return data;
+    //return this.httpClient.delete<Client>(`${this.url}/${client.id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {

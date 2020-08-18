@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
       })
     } else {
       await this.clientService.postClient(this.client);
+      this.cleanForm(form);
       this.getClients();
     }
   }
@@ -33,9 +34,8 @@ export class AppComponent implements OnInit {
   }
 
   deleteClient(client: Client) {
-    this.clientService.deleteClient(client).subscribe(() => {
-      this.getClients();
-    })
+    this.clients = this.clientService.deleteClient(client);
+    this.getClients();
   }
 
   editClient (client: Client) {
