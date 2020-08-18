@@ -2,23 +2,23 @@
   "clientes": [
     {
       "id": "1",
-      "nome": "jonathas",
+      "name": "jonathas",
       "cpf": "12345678901",
-      "cep": "00000000",
-      "logradouro": "logradouro",
-      "bairro": "bairro",
-      "localidade": "localidade",
-      "uf": "bahia"
+      "zip": "00000000",
+      "address": "caminho 11",
+      "neighborhood": "urbis 2",
+      "city": "eunapolis",
+      "state": "BA"
     },
     {
       "id": "2",
-      "nome": "jonathas sales",
+      "name": "jonathas sales",
       "cpf": "12345678921",
-      "cep": "00000023",
-      "logradouro": "logradouro",
-      "bairro": "bairro",
-      "localidade": "localidade",
-      "uf": "bahia"
+      "zip": "00000023",
+      "address": "jose paes de almeida",
+      "neighborhood": "jardim finotti",
+      "city": "Uberlandia",
+      "state": "MG"
     }
   ]
 }
