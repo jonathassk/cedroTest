@@ -1,5 +1,6 @@
 <app-header></app-header>
 <div class="container mt-3 mb-3">
+
   <h4 class="card-header mb-3">Formulario de contatos</h4>
   <form (ngSubmit)="f.form.valid && postClient(f)" #f="ngForm">
     <div class="form-group row">
@@ -44,8 +45,10 @@
       <input type="text" name="state" class="form-control form-control-sm" id="state" [(ngModel)]="client.state">
     </div>
     </div>
+    <div class="">
       <button type="submit" class="btn btn-primary btn-sm">registrar</button>
       <button type="reset" class="btn btn-danger btn-sm ml-1" (click)="cleanForm(f)">apagar</button>
+    </div>
   </form>
 </div>
 
@@ -73,7 +76,7 @@
         <td>{{client.city}} / {{client.state}}</td>
         <td>
           <button type="button" class="btn btn-warning btn-sm" (click)="editClient(client)">Editar</button>
-          <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteClient(client)">Deletar</button>
+          <button type="button" class="btn btn-danger btn-sm ml-1 justify-content-end" (click)="deleteClient(client)">Deletar</button>
         </td>
       </tr>
     </tbody>

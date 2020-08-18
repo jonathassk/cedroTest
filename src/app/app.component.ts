@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from './models/Client';
 import { ClientsService } from './service/clients.service';
 import { NgForm } from '@angular/forms';
+import { Field } from './interfaces/Field';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,17 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  title = 'cedro';
+ 
   client = {} as Client;
   clients: Client[];
+  
+  constructor(private clientService: ClientsService) {
 
-  constructor(private clientService: ClientsService) {}
+  }
 
-  ngOnInit() { this.getClients(); }
+  ngOnInit() { 
+    this.getClients();
+  }
 
   async postClient(form: NgForm) {
     if(this.client.id !== undefined) {
@@ -30,12 +35,15 @@ export class AppComponent implements OnInit {
   }
 
   getClients() {
-    this.clients = this.clientService.getClients();
+    this.clientService.getCars().subscribe((clients: Client[]) => {
+      this.clients = clients;
+    });
   }
 
   deleteClient(client: Client) {
-    this.clients = this.clientService.deleteClient(client);
-    this.getClients();
+    this.clientService.deleteClient(client).subscribe(() => {
+      this.getClients();
+    });
   }
 
   editClient (client: Client) {
