@@ -1,48 +1,69 @@
 <app-header></app-header>
 <div class="container mt-3 mb-3">
 
+
+
+
   <h4 class="card-header mb-3">Formulario de contatos</h4>
-  <form (ngSubmit)="f.form.valid && postClient(f)" #f="ngForm">
+  <form (ngSubmit)="f.form.valid && postClient(f)" #f="ngForm" novalidate>
     <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Nome</label>
-      <div class="col-sm-10">
-      <input type="text" name="name" class="form-control form-control-sm" id="name" [(ngModel)]="client.name" #name="ngModel">
-      </div>
+    <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Nome</label>
+    <div class="col-sm-10">
+      <input type="text" name="name" class="form-control form-control-sm" id="name" [(ngModel)]="client.name" #name="ngModel" (change)="log(name)" required minlength="4">
+    </div>
+    </div>
+    <div *ngIf="name.invalid && name.touched" class="alert alert-danger alert-dismissible fade show mt-3">
+      <div *ngIf="name.errors.minlength || name.errors.required"> O nome deve conter pelo menos 4 caracteres </div>
     </div>
     <div class="form-group row">
       <label for="cpf" class="col-sm-2 col-form-label col-form-label-sm">CPF</label>
       <div class="col-sm-10">
-      <input type="text" name="cpf" class="form-control form-control-sm" id="cpf" mask="000.000.000-00" [(ngModel)]="client.cpf">
+      <input type="text" name="cpf" class="form-control form-control-sm" id="cpf" placeholder="000.000.000-00" mask="000.000.000-00" #cpf="ngModel" [(ngModel)]="client.cpf" >
     </div>
+    </div>
+    <div *ngIf="cpf.invalid && cpf.touched" class="alert alert-danger alert-dismissible fade show mt-3">
+      <div *ngIf="cpf.invalid && cpf.touched"> O cpf deve ser completo </div>
     </div>
     <div class="form-group row">
       <label for="zip" class="col-sm-2 col-form-label col-form-label-sm">CEP</label>
       <div class="col-sm-10">
-      <input type="text" name="zip" class="form-control form-control-sm" id="zip" mask="00000-000"	[(ngModel)]="client.zip">
+      <input type="text" name="zip" class="form-control form-control-sm" id="zip" placeholder="00000-000" mask="00000-000" #zip="ngModel"	[(ngModel)]="client.zip">
     </div>
+    </div>
+    <div *ngIf="zip.invalid && zip.touched" class="alert alert-danger alert-dismissible fade show mt-3">
+      <div *ngIf="zip.invalid && zip.touched"> O cep deve ser completo </div>
     </div>
     <div class="form-group row">
       <label for="address" class="col-sm-2 col-form-label col-form-label-sm">logradouro</label>
       <div class="col-sm-10">
-      <input type="text" name="address" class="form-control form-control-sm" id="address" [(ngModel)]="client.address">
+      <input type="text" name="address" class="form-control form-control-sm" id="address" [(ngModel)]="client.address" #address="ngModel" required minlength="4">
     </div>
+    </div>
+    <div *ngIf="address.invalid && address.touched" class="alert alert-danger alert-dismissible fade show mt-3">
+      <div *ngIf="address.errors.minlength || address.errors.required">O nome deve conter pelo menos 4 caracteres </div>
     </div>
     <div class="form-group row">
       <label for="neighborhood" class="col-sm-2 col-form-label col-form-label-sm">bairro</label>
       <div class="col-sm-10">
-      <input type="text" name="neighborhood" class="form-control form-control-sm" id="neighborhood" [(ngModel)]="client.neighborhood">
+      <input type="text" name="neighborhood" class="form-control form-control-sm" id="neighborhood" [(ngModel)]="client.neighborhood" #neighborhood="ngModel" required minlength="4">
     </div>
+    </div>
+    <div *ngIf="neighborhood.invalid && neighborhood.touched" class="alert alert-danger alert-dismissible fade show mt-3">
+      <div *ngIf="neighborhood.errors.minlength || neighborhood.errors.required">O nome deve conter pelo menos 4 caracteres </div>
     </div>
     <div class="form-group row">
       <label for="city" class="col-sm-2 col-form-label col-form-label-sm">localidade</label>
       <div class="col-sm-10">
-      <input type="text" name="city" class="form-control form-control-sm" id="city" [(ngModel)]="client.city">
+      <input type="text" name="city" class="form-control form-control-sm" id="city" [(ngModel)]="client.city" #city="ngModel" required minlength="4">
     </div>
+    </div>
+    <div *ngIf="city.invalid && city.touched" class="alert alert-danger alert-dismissible fade show mt-3">
+      <div *ngIf="city.errors.minlength || city.errors.required">O nome deve conter pelo menos 4 caracteres </div>
     </div>
     <div class="form-group row">
       <label for="state" class="col-sm-2 col-form-label col-form-label-sm">estado</label>
       <div class="col-sm-10">
-      <input type="text" name="state" class="form-control form-control-sm" id="state" [(ngModel)]="client.state">
+      <input type="text" name="state" class="form-control form-control-sm" id="state" [(ngModel)]="client.state" >
     </div>
     </div>
     <div class="">
@@ -51,6 +72,7 @@
     </div>
   </form>
 </div>
+
 
 <div class="table-responsive-sm">
   <h4 class="card-header">Lista de contatos</h4>
