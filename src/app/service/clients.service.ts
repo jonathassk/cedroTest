@@ -1,20 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
 import {Client} from '../models/Client';
 import { v4 as uuidv4 } from 'uuid';
-import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientsService {
-  url = 'http://localhost:3000/clientes';
-  constructor(private httpClient: HttpClient) { }
+  constructor() { }
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   getClients(): Client[] {
     let data = JSON.parse(localStorage.getItem("client") || '[]');
@@ -32,7 +25,6 @@ export class ClientsService {
   updateClient(client: Client): Client {
     let data = JSON.parse(localStorage.getItem("client") || '[]');
     let dataFiltered = data.filter(item => item.id !== client.id);
-    console.log(client)
     dataFiltered.push(client);
     localStorage.setItem("client", JSON.stringify(dataFiltered));
     return data;
@@ -45,13 +37,4 @@ export class ClientsService {
     return data;
   }
 
-  handleError(error: HttpErrorResponse) {
-    let errorMsg = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMsg = error.error.message;
-    } else {
-      errorMsg = `${error.status} -${error.message}`;
-    }
-    return throwError(errorMsg);
-  }
 }
