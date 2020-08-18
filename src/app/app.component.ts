@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(private clientService: ClientsService) {}
 
-  ngOnInit() { this.getClients(); }
+  ngOnInit() { this.getClients(); console.log(localStorage.getItem("client"))}
 
   postClient(form: NgForm) {
     if(this.client.id !== undefined) {

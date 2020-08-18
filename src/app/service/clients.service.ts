@@ -24,10 +24,18 @@ export class ClientsService {
   } 
 
   postClient(client: Client): Observable<Client> {
+    console.log('1')
+    let data = JSON.parse(localStorage.getItem("client") || '[]');
+    console.log('2', data)
+    data.push(client);
+    console.log('3', client)
+    localStorage.setItem("client", JSON.stringify(data))
+    console.log('4')
     return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   updateClient(client: Client): Observable<Client> {
+    
     return this.httpClient.put<Client>(`${this.url}/${client.id}`, client, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
