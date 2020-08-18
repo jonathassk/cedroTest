@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   getClients() {
     this.clientService.getClients().subscribe((clients: Client[]) => {
       this.clients = clients;
-      if (this.clients.length == 0) {
+      if (this.clients.length == 0 && localStorage.getItem("contatos")) {
         this.getClientsByStorage();
       }
       localStorage.setItem("contatos", JSON.stringify(clients))
@@ -52,8 +52,11 @@ export class AppComponent implements OnInit {
     })
   }
 
-  deleteClient(client: Client) {
+  deleteClient(client: Client): void {
     this.clientService.deleteClient(client).subscribe(() => {
+      if(this.clients.length === 1){
+        localStorage.removeItem("contatos")
+      }
       this.getClients();
     });
   }
