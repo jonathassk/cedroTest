@@ -3,6 +3,7 @@ import { Client } from './models/Client';
 import { ClientsService } from './service/clients.service';
 import { NgForm } from '@angular/forms';
 import { Field } from './interfaces/Field';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-root',
@@ -24,19 +25,27 @@ export class AppComponent implements OnInit {
 
   async postClient(form: NgForm) {
     if(this.client.id !== undefined) {
-      await this.clientService.updateClient(this.client);
-      this.cleanForm(form);
-      this.getClients();
+      await this.clientService.updateClient(this.client).subscribe(() => {
+        this.cleanForm(form);
+      });
     } else {
-      await this.clientService.postClient(this.client);
-      this.cleanForm(form);
-      this.getClients();
+      await this.clientService.postClient(this.client).subscribe(() => {
+        this.cleanForm(form);
+      });
     }
   }
 
   getClients() {
-    this.clientService.getCars().subscribe((clients: Client[]) => {
+    this.clientService.getClients().subscribe((clients: Client[]) => {
       this.clients = clients;
+      if (this.clients.length == 0) {
+        this.clients = JSON.parse(localStorage.getItem("contatos"));
+        this.clients.map(item => {
+          console.log('dentro do map', item)
+          this.clientService.postClient(item).subscribe();
+        })
+      }
+      localStorage.setItem("contatos", JSON.stringify(this.clients))
     });
   }
 

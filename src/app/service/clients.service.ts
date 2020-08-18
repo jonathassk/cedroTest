@@ -17,11 +17,11 @@ export class ClientsService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  getCars(): Observable<Client[]> {
+  getClients(): Observable<Client[]> {
     return this.httpClient.get<Client[]>(this.url).pipe(retry(1),catchError(this.handleError));
   }
 
-  getCarById(id: number) : Observable<Client> {
+  getClientById(id: number) : Observable<Client> {
     return this.httpClient.get<Client>(`${this.url}/${id}`).pipe(retry(2),catchError(this.handleError));
   }
 
