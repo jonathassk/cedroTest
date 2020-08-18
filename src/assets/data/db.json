@@ -1,8 +1,19 @@
 {
   "clientes": [
     {
-      "state": "dsa",
-      "id": 1
+      "name": "jonas",
+      "zip": "38904923",
+      "address": "dsadsa",
+      "city": "dsadas",
+      "state": "MG",
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "state": "ds",
+      "id": 4
     }
   ]
 }

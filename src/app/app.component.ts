@@ -39,14 +39,17 @@ export class AppComponent implements OnInit {
     this.clientService.getClients().subscribe((clients: Client[]) => {
       this.clients = clients;
       if (this.clients.length == 0) {
-        this.clients = JSON.parse(localStorage.getItem("contatos"));
-        this.clients.map(item => {
-          console.log('dentro do map', item)
-          this.clientService.postClient(item).subscribe();
-        })
+        this.getClientsByStorage();
       }
-      localStorage.setItem("contatos", JSON.stringify(this.clients))
+      localStorage.setItem("contatos", JSON.stringify(clients))
     });
+  }
+
+  getClientsByStorage () {
+    this.clients = JSON.parse(localStorage.getItem("contatos"));
+    this.clients.map(item => {
+      this.clientService.postClient(item).subscribe();
+    })
   }
 
   deleteClient(client: Client) {

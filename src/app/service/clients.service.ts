@@ -14,7 +14,7 @@ export class ClientsService {
   constructor(private httpClient: HttpClient) { }
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'cache-Control': 'no-cache, no-store, must-revalidate'})
   }
 
   getClients(): Observable<Client[]> {
@@ -26,11 +26,11 @@ export class ClientsService {
   }
 
   postClient(client: Client): Observable<Client> {
-    return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(0), catchError(this.handleError));
   }
 
   updateClient(client: Client): Observable<Client> {
-    return this.httpClient.put<Client>(`${this.url}/${client.id}`, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.httpClient.put<Client>(`${this.url}/${client.id}`, JSON.stringify(client), this.httpOptions).pipe(retry(0), catchError(this.handleError));
   }
 
   deleteClient(client: Client): Observable<Client> {
