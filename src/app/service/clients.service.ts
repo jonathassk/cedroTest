@@ -34,8 +34,13 @@ export class ClientsService {
     //return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  updateClient(client: Client): Observable<Client> {
-    return this.httpClient.put<Client>(`${this.url}/${client.id}`, client, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  updateClient(client: Client): Client {
+    let data = JSON.parse(localStorage.getItem("client") || '[]');
+    let dataFiltered = data.filter(item => item.id !== client.id);
+    console.log(client)
+    dataFiltered.push(client);
+    localStorage.setItem("client", JSON.stringify(dataFiltered));
+    return data;
   }
 
   deleteClient(client: Client): Client[] {

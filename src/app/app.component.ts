@@ -19,9 +19,9 @@ export class AppComponent implements OnInit {
 
   async postClient(form: NgForm) {
     if(this.client.id !== undefined) {
-      this.clientService.updateClient(this.client).subscribe(() => {
-        this.cleanForm(form);
-      })
+      await this.clientService.updateClient(this.client);
+      this.cleanForm(form);
+      this.getClients();
     } else {
       await this.clientService.postClient(this.client);
       this.cleanForm(form);
