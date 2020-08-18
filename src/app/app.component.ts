@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(private clientService: ClientsService) {}
 
-  ngOnInit() { this.getClients(); console.log(localStorage.getItem("client"))}
+  ngOnInit() { this.getClients(); }
 
   postClient(form: NgForm) {
     if(this.client.id !== undefined) {
@@ -30,9 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   getClients() {
-    this.clientService.getClients().subscribe((clients: Client[]) => {
-      this.clients = clients;
-    })
+    this.clients = this.clientService.getClients();
   }
 
   deleteClient(client: Client) {

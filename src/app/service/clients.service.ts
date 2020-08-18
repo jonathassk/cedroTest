@@ -15,8 +15,9 @@ export class ClientsService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  getClients(): Observable<Client[]> {
-    return this.httpClient.get<Client[]>(this.url).pipe(retry(2), catchError(this.handleError));
+  getClients(): Client[] {
+    let data = JSON.parse(localStorage.getItem("client") || '[]');
+    return data;
   }
 
   getClientById(id: number): Observable<Client> {
@@ -24,13 +25,9 @@ export class ClientsService {
   } 
 
   postClient(client: Client): Observable<Client> {
-    console.log('1')
     let data = JSON.parse(localStorage.getItem("client") || '[]');
-    console.log('2', data)
     data.push(client);
-    console.log('3', client)
-    localStorage.setItem("client", JSON.stringify(data))
-    console.log('4')
+    localStorage.setItem("client", JSON.stringify(data));
     return this.httpClient.post<Client>(this.url, JSON.stringify(client), this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
