@@ -21,10 +21,6 @@ export class ClientsService {
     return data;
   }
 
-  getClientById(id: number): Observable<Client> {
-    return this.httpClient.get<Client>(`${this.url}/${id}`).pipe(retry(1), catchError(this.handleError));
-  } 
-
   postClient(client: Client): Client {
     let data = JSON.parse(localStorage.getItem("client") || '[]');
     client.id = uuidv4();
