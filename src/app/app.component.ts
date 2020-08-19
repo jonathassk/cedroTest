@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from './models/Client';
 import { ClientsService } from './service/clients.service';
 import {NgForm, NgModel} from '@angular/forms';
-
+import { States } from '../assets/selectOptions/states';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   client = {} as Client;
   clients: Client[];
-  inputEmpty: Client;
+  states: string[];
 
   constructor(private clientService: ClientsService) {
 
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClients();
+    this.getStates();
   }
 
   async postClient(form: NgForm): Promise<void> {
@@ -71,7 +72,7 @@ export class AppComponent implements OnInit {
     this.client = {} as Client;
   }
 
-  log(name: NgModel) {
-    console.log(name);
+  getStates(): void {
+    this.states = States;
   }
 }

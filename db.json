@@ -5,10 +5,38 @@
       "zip": "38904923",
       "address": "dsadsa",
       "city": "dsadas",
-      "state": "",
+      "state": "MG",
       "cpf": "05505184529",
       "neighborhood": "dsaj",
       "id": 1
+    },
+    {
+      "address": "dsadsa",
+      "name": "jonas",
+      "zip": "38904923",
+      "city": "dsadas",
+      "cpf": "05505184529",
+      "neighborhood": "fdsa",
+      "id": 2
+    },
+    {
+      "city": "dsadas",
+      "name": "jonas",
+      "zip": "38904923",
+      "address": "dsadsa",
+      "neighborhood": "dsadas",
+      "cpf": "05505184529",
+      "id": 3
+    },
+    {
+      "name": "dajdsklakl",
+      "cpf": "32830923109",
+      "zip": "38290382",
+      "address": "mdklasmd",
+      "neighborhood": "mdkslamksd",
+      "city": "mkldsmkdls",
+      "state": "PI",
+      "id": 4
     }
   ]
 }
