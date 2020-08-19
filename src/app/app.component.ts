@@ -14,10 +14,10 @@ export class AppComponent implements OnInit {
   client = {} as Client;
   clients: Client[];
   states: string[];
+  isShowUpdate = false;
+  isShowDelete = false;
 
-  constructor(private clientService: ClientsService) {
-
-  }
+  constructor(private clientService: ClientsService) {}
 
   ngOnInit(): void {
     this.getClients();
@@ -26,14 +26,18 @@ export class AppComponent implements OnInit {
 
   async postClient(form: NgForm): Promise<void> {
     if (this.client.id !== undefined) {
-        await this.clientService.updateClient(this.client).subscribe(() => {
-          this.cleanForm(form);
-        });
+      this.changeVisibilityUpdate();
       } else {
       await this.clientService.postClient(this.client).subscribe(() => {
         this.cleanForm(form);
       });
     }
+  }
+
+  updateClient(form: NgForm): void{
+     this.clientService.updateClient(this.client).subscribe(() => {
+      this.cleanForm(form);
+    });
   }
 
   getClients(): void {
@@ -74,5 +78,13 @@ export class AppComponent implements OnInit {
 
   getStates(): void {
     this.states = States;
+  }
+
+  changeVisibilityUpdate(): void {
+    this.isShowUpdate = !this.isShowUpdate;
+  }
+
+  changeVisibilityDelete(): void {
+    this.isShowDelete = !this.isShowDelete;
   }
 }

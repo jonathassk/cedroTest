@@ -1,9 +1,5 @@
 <app-header></app-header>
 <div class="container mt-3 mb-3">
-
-
-
-
   <h4 class="card-header mb-3">Formulario de contatos</h4>
   <form (ngSubmit)="f.form.valid && postClient(f)" #f="ngForm" novalidate>
     <div class="form-group row">
@@ -105,4 +101,13 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="isShowUpdate" class="jumbotron jumbotron-fluid h-100 row align-items-center align-center">
+  <div class="container">
+    <h1 class="display-4">Confirmar Alteração?</h1>
+    <p class="lead">Você realmente deseja modificar os dados desse contato?.</p>
+    <button type="button" class="btn btn-primary btn-sm mr-3" (click)="updateClient(f); changeVisibilityUpdate();">Confirmar</button>
+    <button type="button" class="btn btn-warning btn-sm" (click)="changeVisibilityUpdate()">Cancelar</button>
+  </div>
 </div>
