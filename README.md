@@ -1,6 +1,6 @@
 # Test cedro 
 
-Esse projeto foi feito em angular, para a sua execução é só utilizar o comando `ng serve` para iniciar.
+Esse projeto foi feito em angular, para a sua execução é só utilizar o comando `ng serve` para iniciar apos instalar os modulos necessarios pelo npm install.
 
 ## Persistencia de dados
 
