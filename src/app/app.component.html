@@ -59,7 +59,7 @@
     <div class="form-group row">
     <label for="city" class="col-sm-2 col-form-label col-form-label-sm">estado</label>
       <div class="col-sm-10">
-    <select [(ngModel)]="client.state" #state="ngModel" name="state" id="state" required  class="custom-select custom-select-sm">
+    <select [(ngModel)]="client.state" name="state" id="state" required  class="custom-select custom-select-sm">
       <option *ngFor="let state of states" [value]="state" >{{state}}</option>
     </select>
       </div>
@@ -96,18 +96,32 @@
         <td>{{client.city}} / {{client.state}}</td>
         <td>
           <button type="button" class="btn btn-warning btn-sm" (click)="editClient(client)">Editar</button>
-          <button type="button" class="btn btn-danger btn-sm ml-1 justify-content-end" (click)="deleteClient(client)">Deletar</button>
+          <button type="button" class="btn btn-danger btn-sm ml-1 justify-content-end" (click)="changeVisibilityDelete(client)">Deletar</button>
         </td>
+
+
+        <div *ngIf="isShowUpdate" class="jumbotron jumbotron-fluid h-100 row align-items-center align-center">
+          <div class="container">
+            <h1 class="display-4">Confirmar Alteração?</h1>
+            <p class="lead">Você realmente deseja modificar os dados desse contato?.</p>
+            <button type="button" class="btn btn-primary btn-sm mr-3" (click)="updateClient(f); changeVisibilityUpdate();">Confirmar</button>
+            <button type="button" class="btn btn-warning btn-sm" (click)="changeVisibilityUpdate()">Cancelar</button>
+          </div>
+        </div>
+
+        <div *ngIf="isShowDelete" class="jumbotron jumbotron-fluid h-100 row align-items-center align-center">
+          <div class="container">
+            <h1 class="display-4">Confirmar Remoção do contato?</h1>
+            <p class="lead">Você realmente deseja deletar os dados desse contato?.</p>
+            <button type="button" class="btn btn-primary btn-sm mr-3" (click)="deleteClient(client); changeVisibilityDelete()">Confirmar</button>
+            <button type="button" class="btn btn-warning btn-sm" (click)="changeVisibilityDelete()">Cancelar</button>
+          </div>
+        </div>
+
+
       </tr>
     </tbody>
   </table>
 </div>
 
-<div *ngIf="isShowUpdate" class="jumbotron jumbotron-fluid h-100 row align-items-center align-center">
-  <div class="container">
-    <h1 class="display-4">Confirmar Alteração?</h1>
-    <p class="lead">Você realmente deseja modificar os dados desse contato?.</p>
-    <button type="button" class="btn btn-primary btn-sm mr-3" (click)="updateClient(f); changeVisibilityUpdate();">Confirmar</button>
-    <button type="button" class="btn btn-warning btn-sm" (click)="changeVisibilityUpdate()">Cancelar</button>
-  </div>
-</div>
+
