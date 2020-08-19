@@ -1,27 +1,31 @@
-# Cedro
+# Test cedro 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
+Esse projeto foi feito em angular, para a sua execução é só utilizar o comando `ng serve` para iniciar.
 
-## Development server
+## Persistencia de dados
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Os dados alem de salvos no localStorage, estão salvos tambem no db.json, ao iniciar a aplicação, caso o DB esteja vazio e o localStorage não, ele faz a transferencia de dados para manterlos iguais antes de que qualquer ação seja feita.
+Para deixar o db.json vazio, deve deixar apenas a base do dado para que seja lido corretamente, da seguinte forma
 
-## Code scaffolding
+```
+{
+  "clientes": [
+   ]
+}
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Detalhes do projeto
+Dos detalhes da implementação do projeto, foram terminados todos
 
-## Build
+- [x] Formulário deve ter validação antes de submeter a API
+- [x] Todos os campos são obrigatorios (os em forma de texto precisam de pelo menos quatro digitos)
+- [x] Cep e Cpf contém máscaras.
+- [x] Deverá seguir o style Guide do Bootstrap
+- [x] Alteração e exclusão devem conter um modal de confirmação
+- [x] Devera conter um Select para escolher a UF
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Por questão de prazo apertado, algumas coisas não foram completadas para melhorar a qualidade e visibilidade do codigo, essas coisas foram:
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* Foi utilizado apenas um componente, para que eu tivesse mais controle do codigo em menos tempo.
+* Não foram feitos testes automatizados.
+* Não foram adicionadas animações para melhorar a experiencia de uso.
